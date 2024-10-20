@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace FNA_Snowfall_Starostin
 {
@@ -22,6 +18,9 @@ namespace FNA_Snowfall_Starostin
         private const int WindowWidth = 800;
         private readonly Random random = new Random();
 
+        /// <summary>
+        /// Конструктор игры Snow. Инициализирует параметры графики.
+        /// </summary>
         public Snow()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,11 +32,17 @@ namespace FNA_Snowfall_Starostin
             graphics.ApplyChanges();
         }
 
+        /// <summary>
+        /// Инициализация игры. Можно добавить логику, если требуется.
+        /// </summary>
         protected override void Initialize()
         {
             base.Initialize();
         }
 
+        /// <summary>
+        /// Загрузка контента (текстуры снежинки и создание объектов снежинок).
+        /// </summary>
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -55,6 +60,9 @@ namespace FNA_Snowfall_Starostin
             }
         }
 
+        /// <summary>
+        /// Обновление логики игры: обработка падения снежинок и их перерождение.
+        /// </summary>
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -65,15 +73,19 @@ namespace FNA_Snowfall_Starostin
             foreach (var snowflake in snowflakes)
             {
                 snowflake.Fall(gameTime);
-                if (snowflake.position.Y > WindowHeight)
+
+                if (snowflake.Position.Y > WindowHeight)
                 {
-                    snowflake.position = new Vector2(random.Next(0, WindowWidth), -50);
+                    snowflake.ResetPosition(new Vector2(random.Next(0, WindowWidth), -50));
                 }
             }
 
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Отрисовка снежинок на экране.
+        /// </summary>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
