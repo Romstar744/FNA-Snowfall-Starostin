@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FNA_Snowfall_Starostin
+﻿namespace FNA_Snowfall_Starostin
 {
     static class Program
     {
