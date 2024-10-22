@@ -12,6 +12,7 @@ namespace FNA_Snowfall_Starostin
         private SpriteBatch spriteBatch;
 
         private Texture2D snowflakeTexture;
+        private Texture2D backgroundTexture;
         private List<Snowflake> snowflakes;
 
         private const int WindowHeight = 600;
@@ -48,6 +49,8 @@ namespace FNA_Snowfall_Starostin
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             snowflakeTexture = Content.Load<Texture2D>("snowflake");
+            backgroundTexture = Content.Load<Texture2D>("background");
+
             snowflakes = new List<Snowflake>();
 
             for (var i = 0; i < 200; i++)
@@ -91,6 +94,8 @@ namespace FNA_Snowfall_Starostin
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
+
+            spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, WindowWidth, WindowHeight), Color.White);
 
             foreach (var snowflake in snowflakes)
             {
